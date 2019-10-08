@@ -17,52 +17,43 @@ module.exports = function multiply(first, second) {
      return result;
   }
   
-  function summ(firstArr,secondArr){ //сложение двух результатов умножения в форме массивов по правилу сложения в столбик с разницей в 1 порядок
-    
-    let result=[];
-    let temp=0;
-    let shotestArrLength=0;
-    
-    
-    let firstArrRev=firstArr.reverse();
-    let secondArrRev=secondArr.reverse();
-    
-    if(firstArr.length<secondArr.length){
-      shotestArrLength=firstArr.length;
-      longestArrLength=secondArr.length;
-      result=secondArrRev;
-    }else if(firstArr.length==secondArr.length){
-      shotestArrLength=secondArr.length;  
-      longestArrLength=firstArr.length;
-      result=firstArrRev;
+  function summ(firstArr,secondArr){
+  let templ=0;
+  
+  let firstRev=firstArr.reverse();
+  let secondRev=secondArr.reverse();
+  let firstLen=firstRev.length;
+  let secondLen=secondRev.length;
+  let maxLen;
+  let result=[];
+  
+  if(firstLen>secondLen){
+    maxLen=firstLen;
     }else{
-      shotestArrLength=secondArr.length;
-      longestArrLength=firstArr.length;
-      result=firstArr;
+    maxLen=secondLen;  
     }
+  
+  for(let i=0; i<=maxLen;i++){
+    let a;
+    let b;
     
-    for(let i=0; i<shotestArrLength; i++){
-        let item=(firstArrRev[i]+secondArrRev[i]+temp)%10;
-        temp=Math.floor((firstArrRev[i]+secondArrRev[i]+temp)/10);
-        result[i]=item;
-          if(i==shotestArrLength-1&&temp!=0){
-          
-          if(result[i+1]){
-          for(let j=i+1; j<longestArrLength;j++){
-            item=(result[j]+temp)%10;
-            temp=Math.floor((result[j]+temp)/10);
-            result[j]=item;
-            if(j==longestArrLength-1&&temp!=0){
-              result.push(temp);
-              
-              }}
-          }else{
-          result.push(temp)
-          }
-          }
+    if(!firstRev[i]){a=0;}
+    else{a=firstRev[i]};
+    
+    if(!secondRev[i]){b=0;}
+    else{b=secondRev[i]};
+    
+    
+    result.push((a+b+templ)%10);
+    templ=Math.floor((a+b+templ)/10);
+    
+    if(templ==0&&i==(maxLen-1)){
+      break;
       }
-    return result.reverse();  
+    
     }
+    return result.reverse();
+}
     
     
   if(first.length>=second.length){
